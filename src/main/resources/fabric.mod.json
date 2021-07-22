@@ -8,7 +8,7 @@
     "Globox_Z"
   ],
   "contact": {},
-  "license": "ARR",
+  "license": "GPLv3",
   "icon": "assets/backslotaddon/icon.png",
   "environment": "*",
   "entrypoints": {

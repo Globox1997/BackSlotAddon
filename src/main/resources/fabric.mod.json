@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "backslotaddon",
+  "version": "${version}",
+  "name": "BackSlot Addon",
+  "description": "Double back sword",
+  "authors": [
+    "Globox_Z"
+  ],
+  "contact": {},
+  "license": "ARR",
+  "icon": "assets/backslotaddon/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": []
+  },
+  "mixins": [
+    "backslotaddon.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.17.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

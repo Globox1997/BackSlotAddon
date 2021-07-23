@@ -3,9 +3,12 @@
   "minVersion": "0.8",
   "package": "net.backslotaddon.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "mixins": [
+    "SwitchPacketMixin"
+  ],
   "client": [
-    "BeltSlotFeatureRendererMixin"
+    "BeltSlotFeatureRendererMixin",
+    "BackToolFeatureRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

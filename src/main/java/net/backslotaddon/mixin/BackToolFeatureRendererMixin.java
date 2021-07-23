@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.At;
 
-import net.backslot.client.feature.BeltSlotFeatureRenderer;
+import net.backslot.client.feature.BackToolFeatureRenderer;
 import net.backslotaddon.config.ConfigInit;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -18,40 +18,42 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3f;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.ShieldItem;
 import net.fabricmc.api.EnvType;
 import net.backslot.BackSlotMain;
 
 @Environment(EnvType.CLIENT)
-@Mixin(BeltSlotFeatureRenderer.class)
-public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
+@Mixin(BackToolFeatureRenderer.class)
+public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
-    public BeltSlotFeatureRendererMixin(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext) {
+    public BackToolFeatureRendererMixin(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext) {
         super(featureRendererContext);
     }
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true, remap = false)
     public void renderBeltSlotMixin(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity livingEntity, float f, float g, float h, float j,
             float k, float l, CallbackInfo info) {
-        if (ConfigInit.CONFIG.double_back_sword) {
+        if (ConfigInit.CONFIG.allow_shield_on_back) {
             PlayerEntity player = (PlayerEntity) livingEntity;
-            ItemStack beltSlotStack = player.getInventory().getStack(42);
             ItemStack backSlotStack = player.getInventory().getStack(41);
-            if (livingEntity instanceof AbstractClientPlayerEntity && !backSlotStack.isEmpty() && !beltSlotStack.isEmpty()) {
-                if (backSlotStack.getItem() instanceof SwordItem && backSlotStack.getItem() instanceof SwordItem) {
-                    matrixStack.push();
-                    ModelPart modelPart = this.getContextModel().body;
-                    modelPart.rotate(matrixStack);
-                    matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-270.0F));
-                    matrixStack.translate(0.23D, -0.25D, 0.28D);
-                    matrixStack.scale(BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale);
-
-                    MinecraftClient.getInstance().getHeldItemRenderer().renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.GROUND, false, matrixStack, vertexConsumerProvider, i);
-                    matrixStack.pop();
-                    info.cancel();
+            if (livingEntity instanceof AbstractClientPlayerEntity && !backSlotStack.isEmpty() && backSlotStack.getItem() instanceof ShieldItem) {
+                matrixStack.push();
+                ModelPart modelPart = this.getContextModel().body;
+                modelPart.rotate(matrixStack);
+                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(45F));
+                double chestTranslate = 0.145D;
+                if (!player.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
+                    chestTranslate = 0.18D;
                 }
+                matrixStack.translate(-0.19D, -0.28D, chestTranslate);
+                float downScaling = 2F;
+                matrixStack.scale(BackSlotMain.CONFIG.backslot_scale * downScaling, BackSlotMain.CONFIG.backslot_scale * downScaling, BackSlotMain.CONFIG.backslot_scale * downScaling);
+                MinecraftClient.getInstance().getHeldItemRenderer().renderItem(livingEntity, backSlotStack, ModelTransformation.Mode.GROUND, false, matrixStack, vertexConsumerProvider, i);
+                matrixStack.pop();
+                info.cancel();
             }
         }
     }

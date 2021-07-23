@@ -7,12 +7,21 @@
   "authors": [
     "Globox_Z"
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/backslotaddon",
+    "issues": "https://github.com/Globox1997/BackSlotAddon/issues",
+    "sources": "https://github.com/Globox1997/BackSlotAddon"
+  },
   "license": "GPLv3",
   "icon": "assets/backslotaddon/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": []
+    "main": [
+      "net.backslotaddon.BackSlotAddonMain"
+    ],
+    "modmenu": [
+      "net.backslotaddon.config.ModMenuIntegration"
+    ]
   },
   "mixins": [
     "backslotaddon.mixins.json"

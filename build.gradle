@@ -3,8 +3,8 @@ plugins {
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -16,6 +16,7 @@ repositories {
 	maven { url "https://maven.siphalor.de/" }
 	maven { url "https://dl.bintray.com/ladysnake/libs" }
 	maven { url "https://maven.shedaniel.me/" }
+	maven { url "https://maven.terraformersmc.com/" }
 }
 
 dependencies {
@@ -24,15 +25,19 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	// Backslot
-	modImplementation ("com.github.Globox1997:BackSlot:70f25dd8f1") {
+	modImplementation ("com.github.Globox1997:BackSlot:71b573b7a7") {
     	exclude(group: "net.fabricmc.fabric-api")
   	}
-// 	  		exclude(group: "com.github.Globox1997:MedievalWeapons")
-// 		exclude(group: "de.siphalor")
-// 		exclude(group: "me.shedaniel.cloth")
-// 		exclude(group: "com.jamieswhiteshirt")
-// 		exclude(group: "me.shedaniel.cloth")
-//   //exclude(group: "com.github.Globox1997:MedievalWeapons")
+	// Modmenu
+	modCompileOnly modRuntime("com.terraformersmc:modmenu:${project.mod_menu_version}"),{
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	// exclude(group: "com.github.Globox1997:MedievalWeapons")
+	// exclude(group: "de.siphalor")
+	// exclude(group: "me.shedaniel.cloth")
+	// exclude(group: "com.jamieswhiteshirt")
+	// exclude(group: "me.shedaniel.cloth")
+	// exclude(group: "com.github.Globox1997:MedievalWeapons")
 
 }
 

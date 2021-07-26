@@ -14,9 +14,12 @@ repositories {
 	maven { url 'https://jitpack.io' }
 	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
 	maven { url "https://maven.siphalor.de/" }
-	maven { url "https://dl.bintray.com/ladysnake/libs" }
+	//maven { url "https://dl.bintray.com/ladysnake/libs" }
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/" }
+	maven { url "https://www.cursemaven.com" }
+    maven { url "https://maven.dblsaiko.net/" }
+    //maven { url "https://server.bbkr.space:8081/artifactory/libs-release/" }
 }
 
 dependencies {
@@ -32,6 +35,10 @@ dependencies {
 	modCompileOnly modRuntime("com.terraformersmc:modmenu:${project.mod_menu_version}"),{
 		exclude(group: "net.fabricmc.fabric-api")
 	}
+	// Canvas
+	//modCompileOnly "grondag:canvas-mc117-1.17:1.0.+"
+	modCompileOnly "grondag:frex-mc117:5.4.234"
+
 	// exclude(group: "com.github.Globox1997:MedievalWeapons")
 	// exclude(group: "de.siphalor")
 	// exclude(group: "me.shedaniel.cloth")

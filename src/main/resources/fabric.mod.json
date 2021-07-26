@@ -19,6 +19,9 @@
     "main": [
       "net.backslotaddon.BackSlotAddonMain"
     ],
+    "client": [
+      "net.backslotaddon.BackSlotAddonClient"
+    ],
     "modmenu": [
       "net.backslotaddon.config.ModMenuIntegration"
     ]

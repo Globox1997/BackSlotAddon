@@ -43,7 +43,7 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
         ItemStack backSlotStack = player.getInventory().getStack(41);
         if (ConfigInit.CONFIG.double_back_sword) {
             if (livingEntity instanceof AbstractClientPlayerEntity && !backSlotStack.isEmpty() && !beltSlotStack.isEmpty()) {
-                if (backSlotStack.getItem() instanceof SwordItem && backSlotStack.getItem() instanceof SwordItem) {
+                if (backSlotStack.getItem() instanceof SwordItem && beltSlotStack.getItem() instanceof SwordItem) {
                     matrixStack.push();
                     ModelPart modelPart = this.getContextModel().body;
                     modelPart.rotate(matrixStack);

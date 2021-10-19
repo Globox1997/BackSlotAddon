@@ -48,6 +48,8 @@ public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                 if (!player.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
                     chestTranslate = 0.18D;
                 }
+                if (ConfigInit.CONFIG.shield_no_clipping)
+                    chestTranslate = chestTranslate + 0.045D;
                 matrixStack.translate(-0.19D, -0.28D, chestTranslate);
                 float downScaling = 2F;
                 matrixStack.scale(BackSlotMain.CONFIG.backslot_scale * downScaling, BackSlotMain.CONFIG.backslot_scale * downScaling, BackSlotMain.CONFIG.backslot_scale * downScaling);

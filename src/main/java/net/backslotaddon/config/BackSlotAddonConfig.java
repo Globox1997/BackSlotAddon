@@ -9,6 +9,7 @@ import me.shedaniel.autoconfig.annotation.Config;
 public class BackSlotAddonConfig implements ConfigData {
     public boolean double_back_sword = true;
     public boolean allow_shield_on_back = true;
+    public boolean shield_no_clipping = false;
     @ConfigEntry.Gui.RequiresRestart
     public boolean allow_lantern_on_belt = true;
     public boolean lantern_on_back = false;

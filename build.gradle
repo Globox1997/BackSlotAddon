@@ -1,10 +1,10 @@
 plugins {
-	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -14,12 +14,10 @@ repositories {
 	maven { url 'https://jitpack.io' }
 	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
 	maven { url "https://maven.siphalor.de/" }
-	//maven { url "https://dl.bintray.com/ladysnake/libs" }
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/" }
 	maven { url "https://www.cursemaven.com" }
     maven { url "https://maven.dblsaiko.net/" }
-    //maven { url "https://server.bbkr.space:8081/artifactory/libs-release/" }
 }
 
 dependencies {
@@ -28,11 +26,11 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	// Backslot
-	modImplementation ("com.github.Globox1997:BackSlot:71b573b7a7") {
+	modImplementation ("com.github.Globox1997:BackSlot:1.18-SNAPSHOT") {
     	exclude(group: "net.fabricmc.fabric-api")
   	}
 	// Modmenu
-	modCompileOnly modRuntime("com.terraformersmc:modmenu:${project.mod_menu_version}"),{
+	modCompileOnly modRuntimeOnly("com.terraformersmc:modmenu:${project.mod_menu_version}"),{
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 	// Canvas
@@ -57,13 +55,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-
-	it.options.encoding = "UTF-8"
-
-	def targetVersion = 8
-	if (JavaVersion.current().isJava9Compatible()) {
-		it.options.release = targetVersion
-	}
+	it.options.release = 17
 }
 
 java {
@@ -79,12 +71,7 @@ jar {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
+			from components.java
 		}
 	}
 

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.At;
 
 import net.backslot.client.feature.BeltSlotFeatureRenderer;
-import net.backslotaddon.BackSlotAddonClient;
+import net.backslotaddon.BackSlotAddonMain;
 import net.backslotaddon.config.ConfigInit;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -57,7 +57,7 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
             }
         }
         if (ConfigInit.CONFIG.allow_lantern_on_belt) {
-            if (livingEntity instanceof AbstractClientPlayerEntity && !beltSlotStack.isEmpty() && beltSlotStack.isIn(BackSlotAddonClient.LANTERN_TAG)) {
+            if (livingEntity instanceof AbstractClientPlayerEntity && !beltSlotStack.isEmpty() && beltSlotStack.isIn(BackSlotAddonMain.LANTERN_TAG)) {
                 matrixStack.push();
                 ModelPart modelPart = this.getContextModel().body;
                 modelPart.rotate(matrixStack);

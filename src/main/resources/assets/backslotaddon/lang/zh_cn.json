@@ -1,0 +1,8 @@
+{
+  "text.autoconfig.backslotaddon.title": "背用武器拓展配置",
+  "text.autoconfig.backslotaddon.option.double_back_sword": "双持大剑",
+  "text.autoconfig.backslotaddon.option.allow_shield_on_back": "允许携带盾牌",
+  "text.autoconfig.backslotaddon.option.allow_lantern_on_belt": "允许携带灯笼",
+  "text.autoconfig.backslotaddon.option.lantern_on_back": "背上的灯笼",
+  "text.autoconfig.backslotaddon.option.shield_no_clipping": "屏蔽弹夹"
+}

@@ -1,5 +1,6 @@
 package net.backslotaddon.mixin;
 
+import net.minecraft.entity.EquipmentSlot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -50,7 +51,10 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                     matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-270.0F));
                     matrixStack.translate(0.23D, -0.25D, 0.28D);
                     matrixStack.scale(BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale);
-                    MinecraftClient.getInstance().getHeldItemRenderer().renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.GROUND, false, matrixStack, vertexConsumerProvider, i);
+                    if (!livingEntity.hasStackEquipped(EquipmentSlot.CHEST)) { //Make items sit flush against back instead of floating when there's no chest plate in slot
+                        matrixStack.translate(0.0F, 0.0F, -0.04F);
+                    }
+                    MinecraftClient.getInstance().getHeldItemRenderer().renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
                     matrixStack.pop();
                     info.cancel();
                 }

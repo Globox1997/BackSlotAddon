@@ -17,7 +17,7 @@ repositories {
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/" }
 	maven { url "https://www.cursemaven.com" }
-    maven { url "https://maven.dblsaiko.net/" }
+	maven { url "https://maven.vram.io/" }
 }
 
 dependencies {
@@ -34,15 +34,7 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 	// Canvas
-	//modCompileOnly "grondag:canvas-mc117-1.17:1.0.+"
-	modCompileOnly "grondag:frex-mc117:5.4.234"
-
-	// exclude(group: "com.github.Globox1997:MedievalWeapons")
-	// exclude(group: "de.siphalor")
-	// exclude(group: "me.shedaniel.cloth")
-	// exclude(group: "com.jamieswhiteshirt")
-	// exclude(group: "me.shedaniel.cloth")
-	// exclude(group: "com.github.Globox1997:MedievalWeapons")
+	modCompileOnly "io.vram:frex-fabric-mc118:6.0.240"
 
 }
 

@@ -9,9 +9,11 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class BackSlotAddonClient implements ClientModInitializer {
 
+    public static final boolean isCanvasLoaded = FabricLoader.getInstance().isModLoaded("canvas");
+
     @Override
     public void onInitializeClient() {
-        if (ConfigInit.CONFIG.allow_lantern_on_belt && FabricLoader.getInstance().isModLoaded("canvas")) {
+        if (ConfigInit.CONFIG.allow_lantern_on_belt && isCanvasLoaded) {
             HeldItemLightListener.register((holdingEntity, heldStack, defaultResult, currentResult) -> {
                 if (holdingEntity instanceof PlayerEntity && !((PlayerEntity) holdingEntity).getInventory().getStack(42).isEmpty()
                         && ((PlayerEntity) holdingEntity).getInventory().getStack(42).isIn(BackSlotAddonMain.LANTERN_TAG)) {

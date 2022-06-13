@@ -1,6 +1,9 @@
 package net.backslotaddon.mixin;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -8,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import net.backslot.client.feature.BackToolFeatureRenderer;
 import net.backslotaddon.config.ConfigInit;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3f;
@@ -29,8 +32,13 @@ import net.backslot.BackSlotMain;
 @Mixin(BackToolFeatureRenderer.class)
 public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
-    public BackToolFeatureRendererMixin(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext) {
-        super(featureRendererContext);
+    @Shadow
+    @Mutable
+    @Final
+    private HeldItemRenderer heldItemRenderer;
+
+    public BackToolFeatureRendererMixin(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context, HeldItemRenderer heldItemRenderer) {
+        super(context, heldItemRenderer);
     }
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true, remap = false)
@@ -48,12 +56,12 @@ public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                 if (!player.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
                     chestTranslate = 0.18D;
                 }
-                if (ConfigInit.CONFIG.shield_no_clipping)
-                    chestTranslate = chestTranslate + 0.045D;
-                matrixStack.translate(-0.19D, -0.28D, chestTranslate);
-                float downScaling = 2F;
+                if (ConfigInit.CONFIG.shield_clipping)
+                    chestTranslate = chestTranslate + 0.125D;
+                matrixStack.translate(0.71D, 0.72D, chestTranslate + 0.42D);
+                float downScaling = 0.5F;
                 matrixStack.scale(BackSlotMain.CONFIG.backslot_scale * downScaling, BackSlotMain.CONFIG.backslot_scale * downScaling, BackSlotMain.CONFIG.backslot_scale * downScaling);
-                MinecraftClient.getInstance().getHeldItemRenderer().renderItem(livingEntity, backSlotStack, ModelTransformation.Mode.GROUND, false, matrixStack, vertexConsumerProvider, i);
+                heldItemRenderer.renderItem(livingEntity, backSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
                 matrixStack.pop();
                 info.cancel();
             }

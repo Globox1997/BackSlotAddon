@@ -4,5 +4,5 @@
   "text.autoconfig.backslotaddon.option.allow_shield_on_back": "Allow Shield Carry",
   "text.autoconfig.backslotaddon.option.allow_lantern_on_belt": "Allow Lantern Carry",
   "text.autoconfig.backslotaddon.option.lantern_on_back": "Lantern on Back",
-  "text.autoconfig.backslotaddon.option.shield_no_clipping": "Shield No Clip"
+  "text.autoconfig.backslotaddon.option.shield_clipping": "Shield Clip"
 }

@@ -1,7 +1,11 @@
 package net.backslotaddon.mixin;
 
 import net.minecraft.entity.EquipmentSlot;
+
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,11 +23,13 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShieldItem;
 import net.minecraft.item.SwordItem;
 import net.fabricmc.api.EnvType;
 import net.backslot.BackSlotMain;
@@ -32,8 +38,13 @@ import net.backslot.BackSlotMain;
 @Mixin(BeltSlotFeatureRenderer.class)
 public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
-    public BeltSlotFeatureRendererMixin(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> featureRendererContext) {
-        super(featureRendererContext);
+    @Shadow
+    @Mutable
+    @Final
+    private HeldItemRenderer heldItemRenderer;
+
+    public BeltSlotFeatureRendererMixin(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context, HeldItemRenderer heldItemRenderer) {
+        super(context, heldItemRenderer);
     }
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true, remap = false)
@@ -53,7 +64,21 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                     matrixStack.scale(BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale);
                     if (!livingEntity.hasStackEquipped(EquipmentSlot.CHEST))
                         matrixStack.translate(0.0F, 0.0F, -0.04F);
-                    MinecraftClient.getInstance().getHeldItemRenderer().renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
+                    heldItemRenderer.renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
+                    matrixStack.pop();
+                    info.cancel();
+                } else if (backSlotStack.getItem() instanceof ShieldItem && beltSlotStack.getItem() instanceof SwordItem) {
+                    matrixStack.push();
+                    ModelPart modelPart = this.getContextModel().body;
+                    modelPart.rotate(matrixStack);
+                    // matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-270.0F + ConfigInit.CONFIG.test4));
+                    matrixStack.translate(-0.07D, -0.05D, 0.23D);
+                    matrixStack.scale(BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale);
+                    if (livingEntity.hasStackEquipped(EquipmentSlot.CHEST))
+                        matrixStack.translate(0.0F, 0.0F, 0.02F);
+                    if (!ConfigInit.CONFIG.shield_clipping)
+                        matrixStack.translate(0.0F, 0.0F, -0.06F);
+                    heldItemRenderer.renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
                     matrixStack.pop();
                     info.cancel();
                 }

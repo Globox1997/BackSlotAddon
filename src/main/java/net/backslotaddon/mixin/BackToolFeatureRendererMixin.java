@@ -1,9 +1,6 @@
 package net.backslotaddon.mixin;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,13 +29,11 @@ import net.backslot.BackSlotMain;
 @Mixin(BackToolFeatureRenderer.class)
 public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
-    @Shadow
-    @Mutable
-    @Final
-    private HeldItemRenderer heldItemRenderer;
+    private final HeldItemRenderer heldItemRenderer;
 
     public BackToolFeatureRendererMixin(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context, HeldItemRenderer heldItemRenderer) {
         super(context, heldItemRenderer);
+        this.heldItemRenderer = heldItemRenderer;
     }
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true, remap = false)

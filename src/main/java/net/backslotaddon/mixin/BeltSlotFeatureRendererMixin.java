@@ -56,7 +56,7 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                     modelPart.rotate(matrixStack);
                     matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-270.0F));
                     matrixStack.translate(0.23D, -0.25D, 0.28D);
-                    matrixStack.scale(BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale);
+                    matrixStack.scale(BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling);
                     if (!livingEntity.hasStackEquipped(EquipmentSlot.CHEST))
                         matrixStack.translate(0.0F, 0.0F, -0.04F);
                     heldItemRenderer.renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
@@ -66,9 +66,8 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                     matrixStack.push();
                     ModelPart modelPart = this.getContextModel().body;
                     modelPart.rotate(matrixStack);
-                    // matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-270.0F + ConfigInit.CONFIG.test4));
                     matrixStack.translate(-0.07D, -0.05D, 0.23D);
-                    matrixStack.scale(BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale, BackSlotMain.CONFIG.backslot_scale);
+                    matrixStack.scale(BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling);
                     if (livingEntity.hasStackEquipped(EquipmentSlot.CHEST))
                         matrixStack.translate(0.0F, 0.0F, 0.02F);
                     if (!ConfigInit.CONFIG.shield_clipping)
@@ -97,8 +96,8 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                 matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180F));
                 matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(positive_x));
                 matrixStack.translate(translate_x, translate_y, translate_z);
-                float scale = 0.3F;
-                matrixStack.scale(BackSlotMain.CONFIG.backslot_scale * scale, BackSlotMain.CONFIG.backslot_scale * scale, BackSlotMain.CONFIG.backslot_scale * scale);
+                float scale = 0.6F;
+                matrixStack.scale(BackSlotMain.CONFIG.beltslot_scaling * scale, BackSlotMain.CONFIG.beltslot_scaling * scale, BackSlotMain.CONFIG.beltslot_scaling * scale);
                 MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(Block.getBlockFromItem(beltSlotStack.getItem()).getDefaultState(), matrixStack, vertexConsumerProvider, i,
                         OverlayTexture.DEFAULT_UV);
                 matrixStack.pop();

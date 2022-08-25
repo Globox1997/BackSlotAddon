@@ -54,8 +54,7 @@ public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                 if (ConfigInit.CONFIG.shield_clipping)
                     chestTranslate = chestTranslate + 0.125D;
                 matrixStack.translate(0.71D, 0.72D, chestTranslate + 0.42D);
-                float downScaling = 0.5F;
-                matrixStack.scale(BackSlotMain.CONFIG.backslot_scale * downScaling, BackSlotMain.CONFIG.backslot_scale * downScaling, BackSlotMain.CONFIG.backslot_scale * downScaling);
+                matrixStack.scale(BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling);
                 heldItemRenderer.renderItem(livingEntity, backSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
                 matrixStack.pop();
                 info.cancel();

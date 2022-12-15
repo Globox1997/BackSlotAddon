@@ -23,11 +23,11 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.item.SwordItem;
+import net.minecraft.util.math.RotationAxis;
 import net.fabricmc.api.EnvType;
 import net.backslot.BackSlotMain;
 
@@ -54,7 +54,7 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                     matrixStack.push();
                     ModelPart modelPart = this.getContextModel().body;
                     modelPart.rotate(matrixStack);
-                    matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-270.0F));
+                    matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-270.0F));
                     matrixStack.translate(0.23D, -0.25D, 0.28D);
                     matrixStack.scale(BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling);
                     if (!livingEntity.hasStackEquipped(EquipmentSlot.CHEST))
@@ -93,8 +93,8 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                     translate_y = -0.95D;
                     translate_z = -0.5D;
                 }
-                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180F));
-                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(positive_x));
+                matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180F));
+                matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(positive_x));
                 matrixStack.translate(translate_x, translate_y, translate_z);
                 float scale = 0.6F;
                 matrixStack.scale(BackSlotMain.CONFIG.beltslot_scaling * scale, BackSlotMain.CONFIG.beltslot_scaling * scale, BackSlotMain.CONFIG.beltslot_scaling * scale);

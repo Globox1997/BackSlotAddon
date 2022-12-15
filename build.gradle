@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -35,6 +35,10 @@ dependencies {
 	}
 	// Canvas
 	modCompileOnly "io.vram:frex-fabric-mc119:6.0.264"
+	// Iris
+	modCompileOnly ('curse.maven:irisshaders-455508:4145293') {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
 }
 

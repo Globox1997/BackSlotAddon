@@ -5,14 +5,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.At;
 
-import net.backslot.network.SwitchPacket;
+import net.backslot.network.SwitchPacketReceiver;
 import net.backslotaddon.BackSlotAddonMain;
 import net.backslotaddon.config.ConfigInit;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 
-@Mixin(SwitchPacket.class)
-public class SwitchPacketMixin {
+@Mixin(SwitchPacketReceiver.class)
+public class SwitchPacketReceiverMixin {
 
     @Inject(method = "isItemAllowed", at = @At("HEAD"), cancellable = true, remap = false)
     private static void isItemAllowed(ItemStack stack, int slot, CallbackInfoReturnable<Boolean> info) {

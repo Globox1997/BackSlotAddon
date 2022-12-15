@@ -17,7 +17,7 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -46,7 +46,7 @@ public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                 matrixStack.push();
                 ModelPart modelPart = this.getContextModel().body;
                 modelPart.rotate(matrixStack);
-                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(45F));
+                matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(45F));
                 double chestTranslate = 0.145D;
                 if (!player.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
                     chestTranslate = 0.18D;

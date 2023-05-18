@@ -21,7 +21,7 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.HeldItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -59,7 +59,7 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                     matrixStack.scale(BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling);
                     if (!livingEntity.hasStackEquipped(EquipmentSlot.CHEST))
                         matrixStack.translate(0.0F, 0.0F, -0.04F);
-                    heldItemRenderer.renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
+                    heldItemRenderer.renderItem(livingEntity, beltSlotStack, ModelTransformationMode.HEAD, false, matrixStack, vertexConsumerProvider, i);
                     matrixStack.pop();
                     info.cancel();
                 } else if (backSlotStack.getItem() instanceof ShieldItem && beltSlotStack.getItem() instanceof SwordItem) {
@@ -72,7 +72,7 @@ public class BeltSlotFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                         matrixStack.translate(0.0F, 0.0F, 0.02F);
                     if (!ConfigInit.CONFIG.shield_clipping)
                         matrixStack.translate(0.0F, 0.0F, -0.06F);
-                    heldItemRenderer.renderItem(livingEntity, beltSlotStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
+                    heldItemRenderer.renderItem(livingEntity, beltSlotStack, ModelTransformationMode.HEAD, false, matrixStack, vertexConsumerProvider, i);
                     matrixStack.pop();
                     info.cancel();
                 }

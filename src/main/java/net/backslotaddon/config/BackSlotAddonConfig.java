@@ -7,6 +7,7 @@ import me.shedaniel.autoconfig.annotation.Config;
 @Config(name = "backslotaddon")
 @Config.Gui.Background("minecraft:textures/block/stone.png")
 public class BackSlotAddonConfig implements ConfigData {
+
     // public double test0 = 0.0D;
     // public double test1 = 0.0D;
     // public double test2 = 0.0D;

@@ -1,6 +1,6 @@
 ### Added:
-- Added Iris light compat
+- 
 ### Fixed:
 - 
 ### Changed:
-- Updated to mc 1.19.4
+- Updated to mc 1.20

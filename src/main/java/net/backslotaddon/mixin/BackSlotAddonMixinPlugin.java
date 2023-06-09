@@ -22,7 +22,7 @@ public class BackSlotAddonMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.contains("IdMapUniforms") && !FabricLoader.getInstance().isModLoaded("iris")) {
+        if (mixinClassName.contains("IdMapUniformsMixin") && !FabricLoader.getInstance().isModLoaded("iris")) {
             return false;
         }
 

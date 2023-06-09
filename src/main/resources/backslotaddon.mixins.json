@@ -10,7 +10,6 @@
   "client": [
     "BeltSlotFeatureRendererMixin",
     "BackToolFeatureRendererMixin",
-    "compat.CommonUniformsMixin",
     "compat.IdMapUniformsMixin"
   ],
   "injectors": {

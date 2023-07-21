@@ -59,8 +59,8 @@ public class IdMapUniformsMixin {
     @ModifyVariable(method = "update", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/client/network/ClientPlayerEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"), ordinal = 0)
     private ItemStack updateMixin(ItemStack original) {
         ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
-        if (hand == Hand.OFF_HAND && clientPlayerEntity.getInventory().getStack(42) != null && !clientPlayerEntity.getInventory().getStack(42) .isEmpty()){
-            return clientPlayerEntity.getInventory().getStack(42) ;
+        if (hand == Hand.OFF_HAND && clientPlayerEntity.getInventory().getStack(42) != null && !clientPlayerEntity.getInventory().getStack(42).isEmpty()){
+            return clientPlayerEntity.getInventory().getStack(42);
         }
         return original;
     }

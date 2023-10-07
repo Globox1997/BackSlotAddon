@@ -37,12 +37,12 @@ public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
     }
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true, remap = false)
-    public void renderBeltSlotMixin(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity livingEntity, float f, float g, float h, float j,
+    public void renderBackToolMixin(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity livingEntity, float f, float g, float h, float j,
             float k, float l, CallbackInfo info) {
         if (ConfigInit.CONFIG.allow_shield_on_back) {
-            PlayerEntity player = (PlayerEntity) livingEntity;
+            PlayerEntity player = livingEntity;
             ItemStack backSlotStack = player.getInventory().getStack(41);
-            if (livingEntity instanceof AbstractClientPlayerEntity && !backSlotStack.isEmpty() && backSlotStack.getItem() instanceof ShieldItem) {
+            if(!backSlotStack.isEmpty() && backSlotStack.getItem() instanceof ShieldItem) {
                 matrixStack.push();
                 ModelPart modelPart = this.getContextModel().body;
                 modelPart.rotate(matrixStack);
@@ -54,7 +54,7 @@ public class BackToolFeatureRendererMixin extends HeldItemFeatureRenderer<Abstra
                 if (ConfigInit.CONFIG.shield_clipping)
                     chestTranslate = chestTranslate + 0.125D;
                 matrixStack.translate(0.71D, 0.72D, chestTranslate + 0.42D);
-                matrixStack.scale(BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling, BackSlotMain.CONFIG.backslot_scaling);
+                matrixStack.scale(BackSlotMain.CONFIG.backslotScaling, BackSlotMain.CONFIG.backslotScaling, BackSlotMain.CONFIG.backslotScaling);
                 heldItemRenderer.renderItem(livingEntity, backSlotStack, ModelTransformationMode.HEAD, false, matrixStack, vertexConsumerProvider, i);
                 matrixStack.pop();
                 info.cancel();

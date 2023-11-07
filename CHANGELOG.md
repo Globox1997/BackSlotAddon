@@ -1,6 +1,6 @@
 ### Added:
 - 
 ### Fixed:
-- 
+- Fixed backslot dependency
 ### Changed:
-- Updated to mc 1.20.1
+- 

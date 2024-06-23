@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 public class BackSlotAddonMain implements ModInitializer {
 
-    public static final TagKey<Item> LANTERN_TAG = TagKey.of(RegistryKeys.ITEM, new Identifier("backslotaddon", "belt_lantern_items"));
+    public static final TagKey<Item> LANTERN_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("backslotaddon", "belt_lantern_items"));
 
     @Override
     public void onInitialize() {

@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -8,12 +8,8 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-	// maven { url 'https://jitpack.io' }
-	// maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
-	// maven { url "https://maven.siphalor.de/" }
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/" }
-	// maven { url "https://www.cursemaven.com" }
 	maven { url "https://maven.vram.io/" }
 	maven { url "https://api.modrinth.com/maven" }
 }
@@ -24,7 +20,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	// Backslot
-	modImplementation ('maven.modrinth:backslot:1.2.15+1.21') {
+	modImplementation ("maven.modrinth:backslot:${project.backslot_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 	// Config
@@ -45,12 +41,6 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
-}
-
-configurations.all {
-   resolutionStrategy {
-     force("net.fabricmc:fabric-loader:$loader_version")
-   }
 }
 
 processResources {

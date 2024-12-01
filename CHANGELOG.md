@@ -1,6 +1,6 @@
 ### Added:
 - 
 ### Fixed:
-- 
+- Fixed iris compat
 ### Changed:
-- Updated to mc 1.21.1
+- 

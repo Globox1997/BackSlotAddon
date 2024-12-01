@@ -31,13 +31,8 @@ dependencies {
 	modCompileOnly modRuntimeOnly("com.terraformersmc:modmenu:${project.mod_menu_version}"),{
 		exclude(group: "net.fabricmc.fabric-api")
 	}
-	// Canvas
-	modCompileOnly "io.vram:frex-fabric-mc119:8.0.327"
 	// Iris
-	// modCompileOnly ('maven.modrinth:iris:1.7.0+1.20.6') {
-	// 	exclude(group: "net.fabricmc.fabric-api")
-	// }
-	modCompileOnly ('maven.modrinth:iris:1.6.2+1.19.2'){
+	modCompileOnly ('maven.modrinth:iris:1.8.0+1.21.1-fabric'){
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 

@@ -1,0 +1,8 @@
+{
+  "text.autoconfig.backslotaddon.title": "Configuración de BackSlotAddon",
+  "text.autoconfig.backslotaddon.option.double_back_sword": "Espada Doble en la Espalda",
+  "text.autoconfig.backslotaddon.option.allow_shield_on_back": "Permitir Escudo en la Espalda",
+  "text.autoconfig.backslotaddon.option.allow_lantern_on_belt": "Permitir Linterna en el Cinturón",
+  "text.autoconfig.backslotaddon.option.lantern_on_back": "Linterna en la Espalda",
+  "text.autoconfig.backslotaddon.option.shield_clipping": "Recorte de Escudo"
+}
